@@ -509,6 +509,31 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
           this.postMessage({ type: "variantsLoaded", variants })
           break
         }
+        case "enhancePrompt": {
+          const client = this.httpClient
+          if (!client) {
+            this.postMessage({
+              type: "enhancePromptError",
+              error: "Not connected to CLI backend",
+              requestId: message.requestId,
+            })
+            break
+          }
+          void client
+            .enhancePrompt(message.text)
+            .then((text) => {
+              this.postMessage({ type: "enhancePromptResult", text, requestId: message.requestId })
+            })
+            .catch((err) => {
+              console.error("[Kilo New] KiloProvider: Failed to enhance prompt:", err)
+              this.postMessage({
+                type: "enhancePromptError",
+                error: err instanceof Error ? err.message : "Failed to enhance prompt",
+                requestId: message.requestId,
+              })
+            })
+          break
+        }
       }
     })
   }

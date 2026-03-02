@@ -1202,6 +1202,53 @@
         ]
       }
     },
+    "/experimental/worktree/diff": {
+      "get": {
+        "operationId": "worktree.diff",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get worktree diff",
+        "description": "Get file diffs for a worktree compared to its base branch. Includes uncommitted changes.",
+        "responses": {
+          "200": {
+            "description": "File diffs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileDiff"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.worktree.diff({\n  ...\n})"
+          }
+        ]
+      }
+    },
     "/experimental/session": {
       "get": {
         "operationId": "experimental.session.list",
@@ -1283,7 +1330,7 @@
         "x-codeSamples": [
           {
             "lang": "js",
-            "source": "import { createOpencodeClient } from \"@opencode-ai/sdk\n\nconst client = createOpencodeClient()\nawait client.experimental.session.list({\n  ...\n})"
+            "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.experimental.session.list({\n  ...\n})"
           }
         ]
       }
@@ -2659,6 +2706,76 @@
             "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.session.message({\n  ...\n})"
           }
         ]
+      },
+      "delete": {
+        "operationId": "session.deleteMessage",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "sessionID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Session ID"
+          },
+          {
+            "in": "path",
+            "name": "messageID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Message ID"
+          }
+        ],
+        "summary": "Delete message",
+        "description": "Permanently delete a specific message (and all of its parts) from a session. This does not revert any file changes that may have been made while processing the message.",
+        "responses": {
+          "200": {
+            "description": "Successfully deleted message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.session.deleteMessage({\n  ...\n})"
+          }
+        ]
       }
     },
     "/session/{sessionID}/message/{messageID}/part/{partID}": {
@@ -3909,11 +4026,12 @@
                                   },
                                   "required": ["input", "output"]
                                 },
-                                "recommended": {
-                                  "type": "boolean"
-                                },
                                 "recommendedIndex": {
                                   "type": "number"
+                                },
+                                "prompt": {
+                                  "type": "string",
+                                  "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
                                 },
                                 "experimental": {
                                   "type": "boolean"
@@ -4336,6 +4454,77 @@
           {
             "lang": "js",
             "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.commitMessage.generate({\n  ...\n})"
+          }
+        ]
+      }
+    },
+    "/enhance-prompt": {
+      "post": {
+        "operationId": "enhancePrompt.enhance",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Enhance prompt",
+        "description": "Rewrite a user's draft prompt into a clearer, more specific, and more effective prompt.",
+        "responses": {
+          "200": {
+            "description": "Enhanced prompt text",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["text"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "description": "The user's draft prompt to enhance",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "template": {
+                    "description": "Custom enhancement template. Must contain ${userInput} placeholder.",
+                    "type": "string"
+                  }
+                },
+                "required": ["text"]
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "js",
+            "source": "import { createOpencodeClient } from \"@kilocode/sdk\n\nconst client = createOpencodeClient()\nawait client.enhancePrompt.enhance({\n  ...\n})"
           }
         ]
       }
@@ -10315,11 +10504,12 @@
                   },
                   "required": ["input", "output"]
                 },
-                "recommended": {
-                  "type": "boolean"
-                },
                 "recommendedIndex": {
                   "type": "number"
+                },
+                "prompt": {
+                  "type": "string",
+                  "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
                 },
                 "experimental": {
                   "type": "boolean"
@@ -11305,11 +11495,12 @@
               "additionalProperties": {}
             }
           },
-          "recommended": {
-            "type": "boolean"
-          },
           "recommendedIndex": {
             "type": "number"
+          },
+          "prompt": {
+            "type": "string",
+            "enum": ["codex", "gemini", "beast", "anthropic", "trinity", "anthropic_without_todo"]
           }
         },
         "required": [

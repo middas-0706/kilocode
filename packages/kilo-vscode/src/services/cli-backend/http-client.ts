@@ -551,6 +551,19 @@ export class HttpClient {
   }
 
   // ============================================
+  // Enhance Prompt Methods
+  // ============================================
+
+  /**
+   * Enhance a user's draft prompt using AI.
+   * Returns the improved prompt text.
+   */
+  async enhancePrompt(text: string, template?: string): Promise<string> {
+    const result = await this.request<{ text: string }>("POST", "/enhance-prompt", { text, template })
+    return result.text
+  }
+
+  // ============================================
   // MCP Methods
   // ============================================
 

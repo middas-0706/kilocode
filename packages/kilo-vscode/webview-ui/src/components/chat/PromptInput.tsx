@@ -36,6 +36,8 @@ export const PromptInput: Component = () => {
 
   const [text, setText] = createSignal("")
   const [ghostText, setGhostText] = createSignal("")
+  const [enhancing, setEnhancing] = createSignal(false)
+  let enhanceCounter = 0
 
   let textareaRef: HTMLTextAreaElement | undefined
   let highlightRef: HTMLDivElement | undefined
@@ -110,6 +112,27 @@ export const PromptInput: Component = () => {
 
     if (message.type === "action" && message.action === "focusInput") {
       textareaRef?.focus()
+    }
+
+    if (message.type === "enhancePromptResult") {
+      const result = message as { type: "enhancePromptResult"; text: string; requestId: string }
+      if (result.requestId === `enhance-${enhanceCounter}`) {
+        setText(result.text)
+        setGhostText("")
+        setEnhancing(false)
+        if (textareaRef) {
+          textareaRef.value = result.text
+          adjustHeight()
+          textareaRef.focus()
+        }
+      }
+    }
+
+    if (message.type === "enhancePromptError") {
+      const result = message as { type: "enhancePromptError"; error: string; requestId: string }
+      if (result.requestId === `enhance-${enhanceCounter}`) {
+        setEnhancing(false)
+      }
     }
   })
 
@@ -228,6 +251,16 @@ export const PromptInput: Component = () => {
     }
   }
 
+  const canEnhance = () => text().trim().length > 0 && !isBusy() && !isDisabled() && !enhancing()
+
+  const handleEnhance = () => {
+    const draft = text().trim()
+    if (!draft || isDisabled() || enhancing()) return
+    enhanceCounter++
+    setEnhancing(true)
+    vscode.postMessage({ type: "enhancePrompt", text: draft, requestId: `enhance-${enhanceCounter}` })
+  }
+
   const handleSend = () => {
     const message = text().trim()
     const imgs = imageAttach.images()
@@ -343,6 +376,28 @@ export const PromptInput: Component = () => {
           <ThinkingSelector />
         </div>
         <div class="prompt-input-hint-actions">
+          <Tooltip value={language.t("prompt.action.enhance")} placement="top">
+            <Button
+              variant="ghost"
+              size="small"
+              onClick={handleEnhance}
+              disabled={!canEnhance()}
+              aria-label={language.t("prompt.action.enhance")}
+            >
+              <Show
+                when={!enhancing()}
+                fallback={
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="enhance-spinner">
+                    <path d="M13.917 7A6.002 6.002 0 0 0 2.083 7H1.071a7.002 7.002 0 0 1 13.858 0h-1.012z" />
+                  </svg>
+                }
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M7.5 1l1.1 3.4L12 5.5l-3.4 1.1L7.5 10l-1.1-3.4L3 5.5l3.4-1.1L7.5 1zM12 9l.7 2.3L15 12l-2.3.7L12 15l-.7-2.3L9 12l2.3-.7L12 9z" />
+                </svg>
+              </Show>
+            </Button>
+          </Tooltip>
           <Show
             when={isBusy()}
             fallback={

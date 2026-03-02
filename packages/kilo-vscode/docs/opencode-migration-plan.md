@@ -67,18 +67,18 @@ Open issues from the [GitHub project board](https://github.com/orgs/Kilo-Org/pro
 
 ### Features
 
-| Feature                                                                       | Status         | Remaining Work                                                                   | Priority |
-| ----------------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------- | -------- |
-| [File Attachments](features/file-attachments.md)                              | 🔨 Partial     | Add non-image file attachment via button, drag-and-drop, or file picker          | P2       |
-| [Anonymous Sign-In Prompts](features/anonymous-signin-prompts.md)             | 🔨 Partial     | Show prompt when anonymous user hits paid model or 100-message limit             | P1       |
-| [Task Completion Notification](features/task-completion-notification.md)      | ❌ Not started | VS Code toast when task completes or awaits input while panel is hidden          | P2       |
-| [Custom OpenAI-Compatible Provider UI](features/custom-openai-provider-ui.md) | 🔨 Partial     | Port `DialogCustomProvider` from `packages/app` to extension webview             | P1       |
-| [Remember Last Model Choice](features/remember-last-model.md)                 | ❌ Not started | Persist last-used model and pre-select it for new sessions                       | P2       |
-| [Expandable MCP Tools](features/expandable-mcp-tools.md)                      | ❌ Not started | Make MCP tool rows expandable to show inputs/outputs like regular tools          | P2       |
-| [Session Preview Improvements](features/session-preview-improvements.md)      | ❌ Not started | Evaluate showing first message snippet or improving title generation             | P2       |
-| [Subagent Visibility](features/subagent-visibility.md)                        | ❌ Not started | Show inline indicator of what a subagent is doing in single-session sidebar view | P2       |
-| [Terminal Command Output Visibility](features/terminal-output-visibility.md)  | ❌ Not started | Show actual command, truncated output, and success/failure in chat               | P1       |
-| [Prompt Improvement Feature](features/prompt-improvement.md)                  | ❌ Not started | Button/shortcut to rewrite the current draft message into a better prompt        | P3       |
+| Feature                                                                       | Status         | Remaining Work                                                                                                                                              | Priority |
+| ----------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [File Attachments](features/file-attachments.md)                              | 🔨 Partial     | Add non-image file attachment via button, drag-and-drop, or file picker                                                                                     | P2       |
+| [Anonymous Sign-In Prompts](features/anonymous-signin-prompts.md)             | 🔨 Partial     | Show prompt when anonymous user hits paid model or 100-message limit                                                                                        | P1       |
+| [Task Completion Notification](features/task-completion-notification.md)      | ❌ Not started | VS Code toast when task completes or awaits input while panel is hidden                                                                                     | P2       |
+| [Custom OpenAI-Compatible Provider UI](features/custom-openai-provider-ui.md) | 🔨 Partial     | Port `DialogCustomProvider` from `packages/app` to extension webview                                                                                        | P1       |
+| [Remember Last Model Choice](features/remember-last-model.md)                 | ❌ Not started | Persist last-used model and pre-select it for new sessions                                                                                                  | P2       |
+| [Expandable MCP Tools](features/expandable-mcp-tools.md)                      | ❌ Not started | Make MCP tool rows expandable to show inputs/outputs like regular tools                                                                                     | P2       |
+| [Session Preview Improvements](features/session-preview-improvements.md)      | ❌ Not started | Evaluate showing first message snippet or improving title generation                                                                                        | P2       |
+| [Subagent Visibility](features/subagent-visibility.md)                        | ❌ Not started | Show inline indicator of what a subagent is doing in single-session sidebar view                                                                            | P2       |
+| [Terminal Command Output Visibility](features/terminal-output-visibility.md)  | ❌ Not started | Show actual command, truncated output, and success/failure in chat                                                                                          | P1       |
+| [Enhance Prompt](features/prompt-improvement.md)                              | 🔨 Partial     | ✨ button in chat input to rewrite draft via LLM; customisable template/provider ([docs](../../../kilo-docs/pages/code-with-ai/features/enhance-prompt.md)) | P3       |
 
 ### Migration (old extension → new)
 
