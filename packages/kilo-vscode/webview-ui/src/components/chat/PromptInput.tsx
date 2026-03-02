@@ -251,11 +251,22 @@ export const PromptInput: Component = () => {
     }
   }
 
-  const canEnhance = () => text().trim().length > 0 && !isBusy() && !isDisabled() && !enhancing()
+  const canEnhance = () => !isBusy() && !isDisabled() && !enhancing()
 
   const handleEnhance = () => {
+    if (isDisabled() || enhancing()) return
     const draft = text().trim()
-    if (!draft || isDisabled() || enhancing()) return
+    if (!draft) {
+      const description = language.t("prompt.action.enhanceDescription")
+      setText(description)
+      setGhostText("")
+      if (textareaRef) {
+        textareaRef.value = description
+        adjustHeight()
+        textareaRef.focus()
+      }
+      return
+    }
     enhanceCounter++
     setEnhancing(true)
     vscode.postMessage({ type: "enhancePrompt", text: draft, requestId: `enhance-${enhanceCounter}` })
