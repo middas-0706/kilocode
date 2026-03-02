@@ -10,12 +10,12 @@ const DEFAULT_TEMPLATE = `Generate an enhanced version of this prompt (reply wit
 
 \${userInput}`
 
-function buildMessages(text: string, template?: string) {
+export function buildMessages(text: string, template?: string) {
   const prompt = (template ?? DEFAULT_TEMPLATE).replace("${userInput}", text)
   return [{ role: "user" as const, content: prompt }]
 }
 
-function clean(text: string) {
+export function clean(text: string) {
   let result = text.trim()
   if (result.startsWith("```")) {
     const first = result.indexOf("\n")
