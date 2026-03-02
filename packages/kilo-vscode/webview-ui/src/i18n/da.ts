@@ -222,6 +222,7 @@ export const dict = {
   "prompt.attachment.remove": "Fjern vedhæftning",
   "prompt.action.send": "Send",
   "prompt.action.stop": "Stop",
+  "prompt.action.enhance": "Forbedr prompt",
 
   "prompt.toast.pasteUnsupported.title": "Ikke understøttet indsæt",
   "prompt.toast.pasteUnsupported.description": "Kun billeder eller PDF'er kan indsættes her.",

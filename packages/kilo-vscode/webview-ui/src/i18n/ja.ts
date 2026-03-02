@@ -221,6 +221,7 @@ export const dict = {
   "prompt.attachment.remove": "添付ファイルを削除",
   "prompt.action.send": "送信",
   "prompt.action.stop": "停止",
+  "prompt.action.enhance": "プロンプトを改善",
 
   "prompt.toast.pasteUnsupported.title": "サポートされていない貼り付け",
   "prompt.toast.pasteUnsupported.description": "ここでは画像またはPDFのみ貼り付け可能です。",

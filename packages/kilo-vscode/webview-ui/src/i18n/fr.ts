@@ -222,6 +222,7 @@ export const dict = {
   "prompt.attachment.remove": "Supprimer la pièce jointe",
   "prompt.action.send": "Envoyer",
   "prompt.action.stop": "Arrêter",
+  "prompt.action.enhance": "Améliorer le prompt",
 
   "prompt.toast.pasteUnsupported.title": "Collage non supporté",
   "prompt.toast.pasteUnsupported.description": "Seules les images ou les PDF peuvent être collés ici.",

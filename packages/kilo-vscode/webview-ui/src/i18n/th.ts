@@ -226,6 +226,7 @@ export const dict = {
   "prompt.attachment.remove": "เอาไฟล์แนบออก",
   "prompt.action.send": "ส่ง",
   "prompt.action.stop": "หยุด",
+  "prompt.action.enhance": "ปรับปรุงพรอมต์",
 
   "prompt.toast.pasteUnsupported.title": "การวางไม่รองรับ",
   "prompt.toast.pasteUnsupported.description": "สามารถวางรูปภาพหรือ PDF เท่านั้น",

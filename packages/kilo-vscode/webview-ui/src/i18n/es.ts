@@ -222,6 +222,7 @@ export const dict = {
   "prompt.attachment.remove": "Eliminar adjunto",
   "prompt.action.send": "Enviar",
   "prompt.action.stop": "Detener",
+  "prompt.action.enhance": "Mejorar prompt",
 
   "prompt.toast.pasteUnsupported.title": "Pegado no soportado",
   "prompt.toast.pasteUnsupported.description": "Solo se pueden pegar imágenes o PDFs aquí.",

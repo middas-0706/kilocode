@@ -222,6 +222,7 @@ export const dict = {
   "prompt.attachment.remove": "Удалить вложение",
   "prompt.action.send": "Отправить",
   "prompt.action.stop": "Остановить",
+  "prompt.action.enhance": "Улучшить промпт",
 
   "prompt.toast.pasteUnsupported.title": "Неподдерживаемая вставка",
   "prompt.toast.pasteUnsupported.description": "Сюда можно вставлять только изображения или PDF.",

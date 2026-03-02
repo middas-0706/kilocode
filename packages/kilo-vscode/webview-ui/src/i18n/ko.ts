@@ -225,6 +225,7 @@ export const dict = {
   "prompt.attachment.remove": "첨부 파일 제거",
   "prompt.action.send": "전송",
   "prompt.action.stop": "중지",
+  "prompt.action.enhance": "프롬프트 개선",
 
   "prompt.toast.pasteUnsupported.title": "지원되지 않는 붙여넣기",
   "prompt.toast.pasteUnsupported.description": "이미지나 PDF만 붙여넣을 수 있습니다.",

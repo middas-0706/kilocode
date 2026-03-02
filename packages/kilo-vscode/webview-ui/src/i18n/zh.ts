@@ -226,6 +226,7 @@ export const dict = {
   "prompt.attachment.remove": "移除附件",
   "prompt.action.send": "发送",
   "prompt.action.stop": "停止",
+  "prompt.action.enhance": "优化提示词",
 
   "prompt.toast.pasteUnsupported.title": "不支持的粘贴",
   "prompt.toast.pasteUnsupported.description": "这里只能粘贴图片或 PDF 文件。",

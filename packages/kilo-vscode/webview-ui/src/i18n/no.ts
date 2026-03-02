@@ -225,6 +225,7 @@ export const dict = {
   "prompt.attachment.remove": "Fjern vedlegg",
   "prompt.action.send": "Send",
   "prompt.action.stop": "Stopp",
+  "prompt.action.enhance": "Forbedre prompt",
 
   "prompt.toast.pasteUnsupported.title": "Liming ikke støttet",
   "prompt.toast.pasteUnsupported.description": "Kun bilder eller PDF-er kan limes inn her.",

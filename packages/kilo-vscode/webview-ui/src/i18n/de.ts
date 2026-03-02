@@ -226,6 +226,7 @@ export const dict = {
   "prompt.attachment.remove": "Anhang entfernen",
   "prompt.action.send": "Senden",
   "prompt.action.stop": "Stopp",
+  "prompt.action.enhance": "Prompt verbessern",
 
   "prompt.toast.pasteUnsupported.title": "Nicht unterstütztes Einfügen",
   "prompt.toast.pasteUnsupported.description": "Hier können nur Bilder oder PDFs eingefügt werden.",

@@ -230,6 +230,7 @@ export const dict = {
   "prompt.attachment.remove": "Ukloni prilog",
   "prompt.action.send": "Pošalji",
   "prompt.action.stop": "Zaustavi",
+  "prompt.action.enhance": "Poboljšaj prompt",
 
   "prompt.toast.pasteUnsupported.title": "Nepodržano lijepljenje",
   "prompt.toast.pasteUnsupported.description": "Ovdje se mogu zalijepiti samo slike ili PDF-ovi.",
