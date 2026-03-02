@@ -38,6 +38,7 @@ export const PromptInput: Component = () => {
   const [ghostText, setGhostText] = createSignal("")
   const [enhancing, setEnhancing] = createSignal(false)
   let enhanceCounter = 0
+  let preEnhanceText: string | null = null
 
   let textareaRef: HTMLTextAreaElement | undefined
   let highlightRef: HTMLDivElement | undefined
@@ -204,6 +205,7 @@ export const PromptInput: Component = () => {
     const target = e.target as HTMLTextAreaElement
     const val = target.value
     setText(val)
+    preEnhanceText = null
     adjustHeight()
     setGhostText("")
     syncHighlightScroll()
@@ -221,6 +223,20 @@ export const PromptInput: Component = () => {
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    // Undo enhanced prompt with Ctrl+Z / ⌘Z
+    if (e.key === "z" && (e.metaKey || e.ctrlKey) && !e.shiftKey && preEnhanceText !== null) {
+      e.preventDefault()
+      const restored = preEnhanceText
+      preEnhanceText = null
+      setText(restored)
+      setGhostText("")
+      if (textareaRef) {
+        textareaRef.value = restored
+        adjustHeight()
+      }
+      return
+    }
+
     if (mention.onKeyDown(e, textareaRef, setText, adjustHeight)) {
       setGhostText("")
       queueMicrotask(scrollToActiveItem)
@@ -267,6 +283,7 @@ export const PromptInput: Component = () => {
       }
       return
     }
+    preEnhanceText = text()
     enhanceCounter++
     setEnhancing(true)
     vscode.postMessage({ type: "enhancePrompt", text: draft, requestId: `enhance-${enhanceCounter}` })
