@@ -6,17 +6,8 @@ import { Log } from "@/util/log"
 
 const log = Log.create({ service: "enhance-prompt" })
 
-const DEFAULT_TEMPLATE = `You are a prompt engineering expert. Your job is to take the user's draft prompt and rewrite it into a clearer, more specific, and more effective prompt that will produce better results from an AI coding assistant.
+const DEFAULT_TEMPLATE = `Generate an enhanced version of this prompt (reply with only the enhanced prompt - no conversation, explanations, lead-in, bullet points, placeholders, or surrounding quotes):
 
-Rules:
-- Preserve the user's intent exactly — do not change what they are asking for
-- Make the prompt more specific and actionable
-- Add relevant context cues (e.g. mention the language, framework, or pattern if implied)
-- Remove ambiguity
-- Keep it concise — don't pad with unnecessary instructions
-- Return ONLY the improved prompt text, nothing else
-
-User's draft prompt:
 \${userInput}`
 
 function buildMessages(text: string, template?: string) {
