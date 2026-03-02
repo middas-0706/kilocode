@@ -78,7 +78,6 @@ Open issues from the [GitHub project board](https://github.com/orgs/Kilo-Org/pro
 | [Session Preview Improvements](features/session-preview-improvements.md)      | ❌ Not started | Evaluate showing first message snippet or improving title generation                                                                                        | P2       |
 | [Subagent Visibility](features/subagent-visibility.md)                        | ❌ Not started | Show inline indicator of what a subagent is doing in single-session sidebar view                                                                            | P2       |
 | [Terminal Command Output Visibility](features/terminal-output-visibility.md)  | ❌ Not started | Show actual command, truncated output, and success/failure in chat                                                                                          | P1       |
-| [Enhance Prompt](features/prompt-improvement.md)                              | 🔨 Partial     | ✨ button in chat input to rewrite draft via LLM; customisable template/provider ([docs](../../../kilo-docs/pages/code-with-ai/features/enhance-prompt.md)) | P3       |
 
 ### Migration (old extension → new)
 
